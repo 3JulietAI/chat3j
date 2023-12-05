@@ -1,0 +1,80 @@
+# Base Chat by 3Juliet, AI
+
+## Overview
+
+Base Chat is an CLI application leveraging the Ollama Framework to create and interact with open-source LLM-based bots and agents. It offers many features for a rich conversational experience.
+
+*Warning: this application features gratuitous use of exec and other subprocess calls that may be vulnerable to arbitrary code execution. Although I have no ill will or villanous intentions, I do encourage you to review the modules and undestand what the functions are doing. I (and copilot) are pretty good about detailed docstrings so hopefully everything is clear for anyone that chooses to read them.
+
+This application is as secure as the system it is run on and is intended for research and learning purposes only. I do have some encrytion functions laying around somewhere if you have a need or a desire to encrypt your db at rest. I also have functionality built in that should allow you to save all conversations to yaml making encrypt-decrypt a less daunting task. If you choose that, I recommend you do not persist to chromadb and return ids with vectors and then query separately.
+
+If you have any questions, please reach out. I am happy to discuss this or other implementations. I also have a ton of open ai based code that I will likely publish as well or I am happy to work out a new implementation of a combination of both. A good use case example is the SystemAgent class in this project and the priming conversation it initiates with new bots at init (that is currently static due to **insert reasonable excuse here). My thought is that in a rag based context engine, a short round of system assisted training may encourage some pretty cool behaviors.
+
+## Features
+
+- **Persistent Memory & Context Management**: Integrates with a local ChromaDB instance for maintaining conversation history and context.
+- **Customizable Agents**: Create bots with custom instructions and modify them post-inception.
+- **Fine-Tuning**: Soon you'll be able to fine-tune bots with personal datasets.
+- **Dynamic Conversations**: Chat using any LLM available through Ollama, or engage two bots in conversation.
+- **AI Tools**: Includes functions for AI applications like streaming response code and module parsing for remote function calling.
+- **Dataclasses**: Extensive use of dataclasses for structured data management.
+- **And**: a bunch of other stuff that is coming soon.
+
+I have also decided to integrate another project into this one and will be actively reworking the retrieval and fine-tuning system that will be based in my JULIET experimental training architecture (her outline is available in the docs but i will be releasing specifics soon).fs
+
+## Installation
+
+### Prerequisites
+
+- Ollama library installation is required. [Ollama.ai](https://ollama.ai).
+- Compatible with Linux and Windows Subsystem for Linux (WSL2).
+
+### Setup
+
+1. **Clone the Repository**:
+
+```bash
+https://github.com/yourusername/basechat.git
+```
+
+2. **Navigate to Project Directory**:
+
+```bash
+cd basechat
+```
+
+3. **Create and Activate Conda Environment**:
+
+```bash
+conda create --name basechat_env
+conda activate basechat_env
+```
+
+4. **Install Requirements**:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+*Detailed usage instructions, commands, and examples will be in the docs coming very soon. In the meantime, feel free to explore the functionality of the inspections.py file and yaml inspections map it provides.*
+
+## Contributing
+
+Contributions, ideas, and partnerships are welcomed. Feel free to contribute enhancements, report bugs, or suggest features.
+
+- Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on contributions.
+- Open an issue or submit a pull request.
+
+## License
+
+Published under a full open-source license. Freely use, modify, and distribute in accordance with the license terms.
+
+## Acknowledgments
+
+*Credits and acknowledgments.*
+
+---
+
+Base Chat - Innovating AI interactions in the open-source community.

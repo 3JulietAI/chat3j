@@ -1,0 +1,7 @@
+.env
+.venv
+
+/agents/juliet
+/agents/clappy
+
+__pycache__

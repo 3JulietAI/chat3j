@@ -1,0 +1,8 @@
+conversations:
+  - uuid:
+    title:
+    host:
+    guest:
+    created_at:
+    last_active:
+    - turns:

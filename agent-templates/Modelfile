@@ -1,0 +1,25 @@
+FROM $llm_model
+
+PARAMETER num_ctx $param_num_ctx
+PARAMETER num_gpu $param_num_gpu
+PARAMETER num_thread $param_num_thread
+PARAMETER temperature $param_temperature
+PARAMETER top_k $param_top_k
+PARAMETER top_p $param_top_p
+PARAMETER seed $seed
+PARAMETER num_predict $num_predict
+PARAMETER mirostat $mirostat
+PARAMETER mirostat_eta $mirostat_eta
+PARAMETER mirostat_tau $mirostat_tau
+PARAMETER repeat_last_n $repeat_last_n
+PARAMETER tfs_z $tfs_z
+
+TEMPLATE """
+### System:
+$system_message
+
+### User:
+{{ .Prompt }}
+
+### Response:
+"""

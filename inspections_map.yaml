@@ -1,0 +1,572 @@
+agent_toolbox:
+- name: analyze_sentence
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Analyzes a sentence to identify parts of speech and basic noun\
+    \ phrase structure.\n    \n    :param sentence: (str) A sentence to be analyzed.\n\
+    \    \n    :returns output: (dict) A dictionary containing POS tags and a basic\
+    \ parse tree.\n    "
+- name: detect_encoding
+  module: agent_toolbox
+  status: untested
+  docstring: null
+- name: launch_text_editor
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Launches a URWID CLI-based text editor located at the given file\
+    \ path.\n\n    :param file_path: The path to the Python file containing the text\
+    \ editor.\n    "
+- name: o_wikipedia_get_search_article
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    A slightly beefier version of wikipedia_get_search_article() that\
+    \ also saves the article content to a file.\n\n    :param query: The query to\
+    \ search Wikipedia for.\n    :returns: A .txt file containing the article content\
+    \ saved to agent directory.\n    "
+- name: parse_wikipedia_article
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Parse http response for a wikipedia article.\n\n    :param response:\
+    \ The http response to parse.\n    :returns: The title and content of the wikipedia\
+    \ article.\n    "
+- name: pos_tag
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Use NLTK's currently recommended part of speech tagger to\n  \
+    \  tag the given list of tokens.\n\n        >>> from nltk.tag import pos_tag\n\
+    \        >>> from nltk.tokenize import word_tokenize\n        >>> pos_tag(word_tokenize(\"\
+    John's big idea isn't all that bad.\")) # doctest: +NORMALIZE_WHITESPACE\n   \
+    \     [('John', 'NNP'), (\"'s\", 'POS'), ('big', 'JJ'), ('idea', 'NN'), ('is',\
+    \ 'VBZ'),\n        (\"n't\", 'RB'), ('all', 'PDT'), ('that', 'DT'), ('bad', 'JJ'),\
+    \ ('.', '.')]\n        >>> pos_tag(word_tokenize(\"John's big idea isn't all that\
+    \ bad.\"), tagset='universal') # doctest: +NORMALIZE_WHITESPACE\n        [('John',\
+    \ 'NOUN'), (\"'s\", 'PRT'), ('big', 'ADJ'), ('idea', 'NOUN'), ('is', 'VERB'),\n\
+    \        (\"n't\", 'ADV'), ('all', 'DET'), ('that', 'DET'), ('bad', 'ADJ'), ('.',\
+    \ '.')]\n\n    NB. Use `pos_tag_sents()` for efficient tagging of more than one\
+    \ sentence.\n\n    :param tokens: Sequence of tokens to be tagged\n    :type tokens:\
+    \ list(str)\n    :param tagset: the tagset to be used, e.g. universal, wsj, brown\n\
+    \    :type tagset: str\n    :param lang: the ISO 639 code of the language, e.g.\
+    \ 'eng' for English, 'rus' for Russian\n    :type lang: str\n    :return: The\
+    \ tagged tokens\n    :rtype: list(tuple(str, str))\n    "
+- name: query_wolfram_alpha
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Query the wolfram alpha api and return the response. Currently\
+    \ just prints the response to stdout and runs as main.\n\n    :param query: The\
+    \ query to use. (\"This is a query\")\n    :return: The response from the api.\n\
+    \    "
+- name: remove_references
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Remove citation references from wikipedia article text by removing\
+    \ text between square brackets and the square brackets themselves.\n\n    :param\
+    \ text: The text to remove references from.\n    "
+- name: wikipedia_get_random_article
+  module: agent_toolbox
+  status: untested
+  docstring: null
+- name: wikipedia_get_search_article
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Search Wikipedia for the query and get the first result's title\
+    \ and content.\n\n    :param query: The query to search Wikipedia for.\n    :returns:\
+    \ A .txt file containing the article content saved to agent directory.\n    "
+- name: word_tokenize
+  module: agent_toolbox
+  status: untested
+  docstring: "\n    Return a tokenized copy of *text*,\n    using NLTK's recommended\
+    \ word tokenizer\n    (currently an improved :class:`.TreebankWordTokenizer`\n\
+    \    along with :class:`.PunktSentenceTokenizer`\n    for the specified language).\n\
+    \n    :param text: text to split into words\n    :type text: str\n    :param language:\
+    \ the model name in the Punkt corpus\n    :type language: str\n    :param preserve_line:\
+    \ A flag to decide whether to sentence tokenize the text or not.\n    :type preserve_line:\
+    \ bool\n    "
+encrypt:
+- name: decrypt_data
+  module: encrypt
+  status: untested
+  docstring: "\n    Decrypt AES encrypted data.\n\n    :param key: The encryption\
+    \ key to use.\n    :param data: The data to decrypt.\n    :returns: The decrypted\
+    \ data.\n    "
+- name: encrypt_data
+  module: encrypt
+  status: untested
+  docstring: "\n    Implement AES encryption for chat logs and other sensitive data.\n\
+    \n    :param key: The encryption key to use.\n    :param data: The data to encrypt.\n\
+    \    :returns: The encrypted data.\n    "
+- name: main
+  module: encrypt
+  status: untested
+  docstring: "\n    CLI commands for encrypt.\n    "
+main:
+- name: child_break_banner
+  module: main
+  status: untested
+  docstring: null
+- name: main_intro
+  module: main
+  status: untested
+  docstring: null
+- name: print_dev_stamp
+  module: main
+  status: untested
+  docstring: "\n    Purposeful re-use of stream_terminal_output to print the dev stamp\
+    \ so I don't have to type it out every time.\n\n    :param dev_stamp: The dev\
+    \ stamp to stream.\n    :returns: Prints streaming dev stamp to terminal\n    "
+- name: print_main_banner
+  module: main
+  status: untested
+  docstring: "\n    Prints the main banner at init.\n\n    :returns: Prints main banner\
+    \ to terminal\n    "
+- name: print_main_menu
+  module: main
+  status: untested
+  docstring: "\n    Pretty sure the name says it all on this one but here is a docstring\
+    \ to appease the linting gods..\n    "
+- name: stream_agent_response
+  module: main
+  status: untested
+  docstring: "\n    Print string one character at a time.\n\n    :param text: The\
+    \ string to print\n    :param delay: The delay between printing each character\n\
+    \    :returns: Prints streaming text to terminal with Agent_Name prepended for\
+    \ terminal chat formatting.\n    "
+- name: stream_disco_def
+  module: main
+  status: untested
+  docstring: "\n    Streams the verbose definition of DISCO representing our DISCO\
+    \ project.. A closely related, yet to be disclosed project. Unless it has been\
+    \ and I forgot to update this docstring.\n\n    :returns: Prints streaming DISCO\
+    \ definitions to terminal\n    "
+agents:
+- name: asdict
+  module: agents
+  status: untested
+  docstring: "Return the fields of a dataclass instance as a new dictionary mapping\n\
+    \    field names to field values.\n\n    Example usage::\n\n      @dataclass\n\
+    \      class C:\n          x: int\n          y: int\n\n      c = C(1, 2)\n   \
+    \   assert asdict(c) == {'x': 1, 'y': 2}\n\n    If given, 'dict_factory' will\
+    \ be used instead of built-in dict.\n    The function applies recursively to field\
+    \ values that are\n    dataclass instances. This will also look into built-in\
+    \ containers:\n    tuples, lists, and dicts.\n    "
+- name: dataclass
+  module: agents
+  status: untested
+  docstring: "Add dunder methods based on the fields defined in the class.\n\n   \
+    \ Examines PEP 526 __annotations__ to determine fields.\n\n    If init is true,\
+    \ an __init__() method is added to the class. If repr\n    is true, a __repr__()\
+    \ method is added. If order is true, rich\n    comparison dunder methods are added.\
+    \ If unsafe_hash is true, a\n    __hash__() method is added. If frozen is true,\
+    \ fields may not be\n    assigned to after instance creation. If match_args is\
+    \ true, the\n    __match_args__ tuple is added. If kw_only is true, then by default\n\
+    \    all fields are keyword-only. If slots is true, a new class with a\n    __slots__\
+    \ attribute is returned.\n    "
+- name: field
+  module: agents
+  status: untested
+  docstring: "Return an object to identify dataclass fields.\n\n    default is the\
+    \ default value of the field.  default_factory is a\n    0-argument function called\
+    \ to initialize a field's value.  If init\n    is true, the field will be a parameter\
+    \ to the class's __init__()\n    function.  If repr is true, the field will be\
+    \ included in the\n    object's repr().  If hash is true, the field will be included\
+    \ in the\n    object's hash().  If compare is true, the field will be used in\n\
+    \    comparison functions.  metadata, if specified, must be a mapping\n    which\
+    \ is stored but not otherwise examined by dataclass.  If kw_only\n    is true,\
+    \ the field will become a keyword-only parameter to\n    __init__().\n\n    It\
+    \ is an error to specify both default and default_factory.\n    "
+- name: message_cache_format_to_prompt
+  module: agents
+  status: untested
+  docstring: null
+- name: parse_docstring
+  module: agents
+  status: untested
+  docstring: "\n    This function is meant to parse docstrings from functions on inspect\
+    \ to pull out the params needed for the listed function to give the user or agent\
+    \ the ability to call the function remote and hopefully be iteratively prompted\
+    \ for args and kwargs. This assumes the docstring is in a consistent format where\
+    \ parameters are listed under ':param' or '@param'.\n\n    :param docstring: (str)\
+    \ The docstring to parse.\n    "
+- name: stream_agent_response
+  module: agents
+  status: untested
+  docstring: "\n    Print string one character at a time.\n\n    :param text: The\
+    \ string to print\n    :param delay: The delay between printing each character\n\
+    \    :returns: Prints streaming text to terminal with Agent_Name prepended for\
+    \ terminal chat formatting.\n    "
+deletecollection:
+- name: main
+  module: deletecollection
+  status: untested
+  docstring: null
+disco:
+- name: check_recent_functions
+  module: disco
+  status: untested
+  docstring: "\n    Using inspect to call the most recent (n) calls and args\n   \
+    \ :param: number of most recent functions for inspect to pull\n    :returns: \n\
+    \    "
+- name: is_safe_input
+  module: disco
+  status: untested
+  docstring: "\n     Implement logic to check for safe input here\n    :param input_value:\n\
+    \    :returns: \n    "
+- name: test_function
+  module: disco
+  status: untested
+  docstring: null
+chat_cli:
+- name: print_chat_intro
+  module: chat_cli
+  status: untested
+  docstring: null
+- name: print_chat_menu
+  module: chat_cli
+  status: untested
+  docstring: "\n    Menu for the chat lobby. \n    "
+- name: toilet_banner_metal
+  module: chat_cli
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Metal\n\n    :param text: The text to bannerize.\n    :return: Print\
+    \ the bannerized text.\n    "
+chroma:
+- name: uuid4
+  module: chroma
+  status: untested
+  docstring: Generate a random UUID.
+messages:
+- name: append_turn_to_conversation_yaml
+  module: messages
+  status: untested
+  docstring: "\n    Appends a turn to the specified conversation in the YAML file.\n\
+    \n    :param conversation_file_path: The file path of the YAML file.\n    :param\
+    \ conversation_uuid: The UUID of the conversation to append to.\n    :param turn:\
+    \ The turn data to append.\n    "
+- name: asdict
+  module: messages
+  status: untested
+  docstring: "Return the fields of a dataclass instance as a new dictionary mapping\n\
+    \    field names to field values.\n\n    Example usage::\n\n      @dataclass\n\
+    \      class C:\n          x: int\n          y: int\n\n      c = C(1, 2)\n   \
+    \   assert asdict(c) == {'x': 1, 'y': 2}\n\n    If given, 'dict_factory' will\
+    \ be used instead of built-in dict.\n    The function applies recursively to field\
+    \ values that are\n    dataclass instances. This will also look into built-in\
+    \ containers:\n    tuples, lists, and dicts.\n    "
+- name: dataclass
+  module: messages
+  status: untested
+  docstring: "Add dunder methods based on the fields defined in the class.\n\n   \
+    \ Examines PEP 526 __annotations__ to determine fields.\n\n    If init is true,\
+    \ an __init__() method is added to the class. If repr\n    is true, a __repr__()\
+    \ method is added. If order is true, rich\n    comparison dunder methods are added.\
+    \ If unsafe_hash is true, a\n    __hash__() method is added. If frozen is true,\
+    \ fields may not be\n    assigned to after instance creation. If match_args is\
+    \ true, the\n    __match_args__ tuple is added. If kw_only is true, then by default\n\
+    \    all fields are keyword-only. If slots is true, a new class with a\n    __slots__\
+    \ attribute is returned.\n    "
+- name: field
+  module: messages
+  status: untested
+  docstring: "Return an object to identify dataclass fields.\n\n    default is the\
+    \ default value of the field.  default_factory is a\n    0-argument function called\
+    \ to initialize a field's value.  If init\n    is true, the field will be a parameter\
+    \ to the class's __init__()\n    function.  If repr is true, the field will be\
+    \ included in the\n    object's repr().  If hash is true, the field will be included\
+    \ in the\n    object's hash().  If compare is true, the field will be used in\n\
+    \    comparison functions.  metadata, if specified, must be a mapping\n    which\
+    \ is stored but not otherwise examined by dataclass.  If kw_only\n    is true,\
+    \ the field will become a keyword-only parameter to\n    __init__().\n\n    It\
+    \ is an error to specify both default and default_factory.\n    "
+- name: format_chat_history
+  module: messages
+  status: untested
+  docstring: "\n    Formats the chat history for display.\n    "
+- name: split_corpus_into_chunks
+  module: messages
+  status: untested
+  docstring: null
+- name: start_new_conversation
+  module: messages
+  status: untested
+  docstring: "\n    Starts a new conversation and returns the conversation UUID.\n\
+    \n    :param host: The name of the host\n    :param host_is_bot: Whether the host\
+    \ is a bot\n    :param guest: The name of the guest agent\n    :param guest_is_bot:\
+    \ Whether the guest is a bot\n\n    :return: Conversation object\n    "
+- name: uuid4
+  module: messages
+  status: untested
+  docstring: Generate a random UUID.
+ollama_cli:
+- name: print_ollama_intro
+  module: ollama_cli
+  status: untested
+  docstring: null
+- name: print_ollama_menu
+  module: ollama_cli
+  status: untested
+  docstring: "\n    Menu for the Camp Ollama. \n    "
+- name: toilet_banner_metal
+  module: ollama_cli
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Metal\n\n    :param text: The text to bannerize.\n    :return: Print\
+    \ the bannerized text.\n    "
+config:
+- name: asdict
+  module: config
+  status: untested
+  docstring: "Return the fields of a dataclass instance as a new dictionary mapping\n\
+    \    field names to field values.\n\n    Example usage::\n\n      @dataclass\n\
+    \      class C:\n          x: int\n          y: int\n\n      c = C(1, 2)\n   \
+    \   assert asdict(c) == {'x': 1, 'y': 2}\n\n    If given, 'dict_factory' will\
+    \ be used instead of built-in dict.\n    The function applies recursively to field\
+    \ values that are\n    dataclass instances. This will also look into built-in\
+    \ containers:\n    tuples, lists, and dicts.\n    "
+- name: dataclass
+  module: config
+  status: untested
+  docstring: "Add dunder methods based on the fields defined in the class.\n\n   \
+    \ Examines PEP 526 __annotations__ to determine fields.\n\n    If init is true,\
+    \ an __init__() method is added to the class. If repr\n    is true, a __repr__()\
+    \ method is added. If order is true, rich\n    comparison dunder methods are added.\
+    \ If unsafe_hash is true, a\n    __hash__() method is added. If frozen is true,\
+    \ fields may not be\n    assigned to after instance creation. If match_args is\
+    \ true, the\n    __match_args__ tuple is added. If kw_only is true, then by default\n\
+    \    all fields are keyword-only. If slots is true, a new class with a\n    __slots__\
+    \ attribute is returned.\n    "
+- name: field
+  module: config
+  status: untested
+  docstring: "Return an object to identify dataclass fields.\n\n    default is the\
+    \ default value of the field.  default_factory is a\n    0-argument function called\
+    \ to initialize a field's value.  If init\n    is true, the field will be a parameter\
+    \ to the class's __init__()\n    function.  If repr is true, the field will be\
+    \ included in the\n    object's repr().  If hash is true, the field will be included\
+    \ in the\n    object's hash().  If compare is true, the field will be used in\n\
+    \    comparison functions.  metadata, if specified, must be a mapping\n    which\
+    \ is stored but not otherwise examined by dataclass.  If kw_only\n    is true,\
+    \ the field will become a keyword-only parameter to\n    __init__().\n\n    It\
+    \ is an error to specify both default and default_factory.\n    "
+chat:
+- name: debug_print_function_return
+  module: chat
+  status: untested
+  docstring: "\n    Debug print function return value\n\n    :param function_name:\
+    \ The name of the function.\n    :param return_value: The return value of the\
+    \ function.\n    :returns: Prints the return value of a function to the terminal.\n\
+    \    "
+- name: start_new_conversation
+  module: chat
+  status: untested
+  docstring: "\n    Starts a new conversation and returns the conversation UUID.\n\
+    \n    :param host: The name of the host\n    :param host_is_bot: Whether the host\
+    \ is a bot\n    :param guest: The name of the guest agent\n    :param guest_is_bot:\
+    \ Whether the guest is a bot\n\n    :return: Conversation object\n    "
+- name: stream_agent_response
+  module: chat
+  status: untested
+  docstring: "\n    Print string one character at a time.\n\n    :param text: The\
+    \ string to print\n    :param delay: The delay between printing each character\n\
+    \    :returns: Prints streaming text to terminal with Agent_Name prepended for\
+    \ terminal chat formatting.\n    "
+- name: toilet_banner_metal
+  module: chat
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Metal\n\n    :param text: The text to bannerize.\n    :return: Print\
+    \ the bannerized text.\n    "
+- name: toilet_banner_plain
+  module: chat
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Plain\n\n    :param text: The text to bannerize.\n    "
+- name: uuid4
+  module: chat
+  status: untested
+  docstring: Generate a random UUID.
+agent_library_cli:
+- name: print_agentslib_intro
+  module: agent_library_cli
+  status: untested
+  docstring: null
+- name: print_agentslib_menu
+  module: agent_library_cli
+  status: untested
+  docstring: "\n    Menu for the agents lobby.\n    "
+- name: toilet_banner_metal
+  module: agent_library_cli
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Metal\n\n    :param text: The text to bannerize.\n    :return: Print\
+    \ the bannerized text.\n    "
+utilities:
+- name: chroma_results_format_to_prompt
+  module: utilities
+  status: untested
+  docstring: null
+- name: create_agent_structure
+  module: utilities
+  status: untested
+  docstring: "\n    Create the agent directory structure and copy any template files\
+    \ needed.\n    \n    :param agent_name: The name of the agent\n    :returns: Agent\
+    \ directory and instructions templates for mostly-semi-seamless integration\n\
+    \    "
+- name: debug_print_function_return
+  module: utilities
+  status: untested
+  docstring: "\n    Debug print function return value\n\n    :param function_name:\
+    \ The name of the function.\n    :param return_value: The return value of the\
+    \ function.\n    :returns: Prints the return value of a function to the terminal.\n\
+    \    "
+- name: format_chat_history
+  module: utilities
+  status: untested
+  docstring: "\n    Formats the chat history for display.\n    "
+- name: initialize_nltk_punkt_tagger
+  module: utilities
+  status: untested
+  docstring: "\n    Initialize the NLTK Punkt Tokenizer for sentence segmentation.\n\
+    \    "
+- name: message_cache_format_to_prompt
+  module: utilities
+  status: untested
+  docstring: null
+- name: overwrite_yaml_with_literal_block
+  module: utilities
+  status: untested
+  docstring: "\n    Overwrite a YAML file with the contents of a dictionary, preserving\
+    \ multi-line strings.\n\n    :param file_path: Path to the YAML file.\n    :param\
+    \ data_dict: The dictionary containing the new data.\n    "
+- name: parse_model_file
+  module: utilities
+  status: untested
+  docstring: "\n    * Modelfile parser\n    Parse a Modelfile and return a dictionary\
+    \ of sections. Primarily intended for updates to the Modelfile. Not currently\
+    \ in use.\n    "
+- name: pos_tag
+  module: utilities
+  status: untested
+  docstring: "\n    Use NLTK's currently recommended part of speech tagger to\n  \
+    \  tag the given list of tokens.\n\n        >>> from nltk.tag import pos_tag\n\
+    \        >>> from nltk.tokenize import word_tokenize\n        >>> pos_tag(word_tokenize(\"\
+    John's big idea isn't all that bad.\")) # doctest: +NORMALIZE_WHITESPACE\n   \
+    \     [('John', 'NNP'), (\"'s\", 'POS'), ('big', 'JJ'), ('idea', 'NN'), ('is',\
+    \ 'VBZ'),\n        (\"n't\", 'RB'), ('all', 'PDT'), ('that', 'DT'), ('bad', 'JJ'),\
+    \ ('.', '.')]\n        >>> pos_tag(word_tokenize(\"John's big idea isn't all that\
+    \ bad.\"), tagset='universal') # doctest: +NORMALIZE_WHITESPACE\n        [('John',\
+    \ 'NOUN'), (\"'s\", 'PRT'), ('big', 'ADJ'), ('idea', 'NOUN'), ('is', 'VERB'),\n\
+    \        (\"n't\", 'ADV'), ('all', 'DET'), ('that', 'DET'), ('bad', 'ADJ'), ('.',\
+    \ '.')]\n\n    NB. Use `pos_tag_sents()` for efficient tagging of more than one\
+    \ sentence.\n\n    :param tokens: Sequence of tokens to be tagged\n    :type tokens:\
+    \ list(str)\n    :param tagset: the tagset to be used, e.g. universal, wsj, brown\n\
+    \    :type tagset: str\n    :param lang: the ISO 639 code of the language, e.g.\
+    \ 'eng' for English, 'rus' for Russian\n    :type lang: str\n    :return: The\
+    \ tagged tokens\n    :rtype: list(tuple(str, str))\n    "
+- name: print_dev_stamp
+  module: utilities
+  status: untested
+  docstring: "\n    Purposeful re-use of stream_terminal_output to print the dev stamp\
+    \ so I don't have to type it out every time.\n\n    :param dev_stamp: The dev\
+    \ stamp to stream.\n    :returns: Prints streaming dev stamp to terminal\n    "
+- name: print_main_banner
+  module: utilities
+  status: untested
+  docstring: "\n    Prints the main banner at init.\n\n    :returns: Prints main banner\
+    \ to terminal\n    "
+- name: stream_agent_response
+  module: utilities
+  status: untested
+  docstring: "\n    Print string one character at a time.\n\n    :param text: The\
+    \ string to print\n    :param delay: The delay between printing each character\n\
+    \    :returns: Prints streaming text to terminal with Agent_Name prepended for\
+    \ terminal chat formatting.\n    "
+- name: stream_disco_def
+  module: utilities
+  status: untested
+  docstring: "\n    Streams the verbose definition of DISCO representing our DISCO\
+    \ project.. A closely related, yet to be disclosed project. Unless it has been\
+    \ and I forgot to update this docstring.\n\n    :returns: Prints streaming DISCO\
+    \ definitions to terminal\n    "
+- name: stream_terminal_output
+  module: utilities
+  status: untested
+  docstring: "\n    Print string one character at a time with a defined delay between\
+    \ characters. I do not like relying on streaming methods from completion endpoints.\
+    \ This is a better way to do it anyway. Agents can talk at different speeds depending\
+    \ on need and will be able to be changed en-chat with a parsed command (eventually)\n\
+    \n    :param text: The string to print\n    :param delay: The delay between printing\
+    \ each character\n    :returns: Prints streaming text to terminal\n    "
+- name: toilet_banner_border_metal
+  module: utilities
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Borderized:Metal\n    "
+- name: toilet_banner_metal
+  module: utilities
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Metal\n\n    :param text: The text to bannerize.\n    :return: Print\
+    \ the bannerized text.\n    "
+- name: toilet_banner_plain
+  module: utilities
+  status: untested
+  docstring: "\n    Toilet subprocess helper for simple pre-stylized banner for prettier\
+    \ outputs. -> Plain\n\n    :param text: The text to bannerize.\n    "
+- name: update_parameters
+  module: utilities
+  status: untested
+  docstring: "\n    * Modelfile editor\n    Update the parameters in a Modelfile.\
+    \ Not currently in use.\n\n    :param parameters: The parameters to update as\
+    \ list.\n    "
+- name: validate_function_return_format
+  module: utilities
+  status: untested
+  docstring: "\n    Function return value review prompt\n\n    :param function_name:\
+    \ The name of the function.\n    :param return_value: The return value of the\
+    \ function.\n    :returns: My sanity during debugging.\n    "
+- name: validate_function_return_type
+  module: utilities
+  status: untested
+  docstring: "\n    Validates the return value of a function.\n\n    :param function_name:\
+    \ The name of the function.\n    :param return_value: The return value of the\
+    \ function.\n    :param expected_type: The expected type of the return value.\n\
+    \    "
+- name: word_tokenize
+  module: utilities
+  status: untested
+  docstring: "\n    Return a tokenized copy of *text*,\n    using NLTK's recommended\
+    \ word tokenizer\n    (currently an improved :class:`.TreebankWordTokenizer`\n\
+    \    along with :class:`.PunktSentenceTokenizer`\n    for the specified language).\n\
+    \n    :param text: text to split into words\n    :type text: str\n    :param language:\
+    \ the model name in the Punkt corpus\n    :type language: str\n    :param preserve_line:\
+    \ A flag to decide whether to sentence tokenize the text or not.\n    :type preserve_line:\
+    \ bool\n    "
+- name: yml_load_agents_list
+  module: utilities
+  status: untested
+  docstring: "\n    Load the projects from the YAML file into a Python dictionary.\n\
+    \n    :returns: Dictionary of existing agents\n    "
+ollama_test: []
+ollama:
+- name: dataclass
+  module: ollama
+  status: untested
+  docstring: "Add dunder methods based on the fields defined in the class.\n\n   \
+    \ Examines PEP 526 __annotations__ to determine fields.\n\n    If init is true,\
+    \ an __init__() method is added to the class. If repr\n    is true, a __repr__()\
+    \ method is added. If order is true, rich\n    comparison dunder methods are added.\
+    \ If unsafe_hash is true, a\n    __hash__() method is added. If frozen is true,\
+    \ fields may not be\n    assigned to after instance creation. If match_args is\
+    \ true, the\n    __match_args__ tuple is added. If kw_only is true, then by default\n\
+    \    all fields are keyword-only. If slots is true, a new class with a\n    __slots__\
+    \ attribute is returned.\n    "
+text_editor_cli:
+- name: main
+  module: text_editor_cli
+  status: untested
+  docstring: Run the editor.
+- name: re_tab
+  module: text_editor_cli
+  status: untested
+  docstring: Return a tabbed string from an expanded one.
+__init__: []

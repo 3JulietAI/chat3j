@@ -1,0 +1,13 @@
+temperature: 0.7
+num_ctx: 4096
+num_gpu: 50
+num_thread: 16
+top_k: 42
+top_p: 0.42
+num_predict: 512
+seed: 0
+mirostat: 0
+mirostat_eta: 0.1
+mirostat_tau: 5.0
+repeat_last_n: 64
+tfs_z: 1
