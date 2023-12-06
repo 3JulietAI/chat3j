@@ -22,7 +22,7 @@ data = {
     "model": model,
     "format": "json",
     "stream": False,
-    "options": {"temperature": 2.5, "top_p": 0.99, "top_k": 100},
+    "options": {"temperature": 0.5, "top_p": 0.99, "top_k": 100},
 }
 
 print(f"Generating a sample user")

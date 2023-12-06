@@ -9,7 +9,7 @@ class OllamaServer:
     Ollama server class. Starts and stops the Ollama server after finding and assigning an available port.
     """
     process = None
-    port = None
+    port: int = 11434 # default1 ollama server port
 
     def start_server(self):
         """
@@ -17,7 +17,9 @@ class OllamaServer:
 
         :returns: None
         """
-        command = f"OLLAMA_HOST=localhost:{self.port} ollama serve"
+        #command = f"OLLAMA_HOST=localhost:{self.port} ollama serve"
+        self.port = self.find_available_port()
+        command = f"ollama serve"
         try:
             self.process = subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             print(f"Ollama server started on port {self.port}")
@@ -33,8 +35,8 @@ class OllamaServer:
             return
 
         # Gracefully terminate the process
-        self.process.terminate()
-
+        #self.process.terminate() # it seems my kernel is struggling with grace so we will need to be a bit more forceful up front for now.
+        self.process.kill()
         # Wait for a bit to see if it shuts down
         try:
             self.process.wait(timeout=5)  # Wait for 5 seconds
@@ -58,14 +60,14 @@ class OllamaServer:
                 try:
                     s.bind(('localhost', port))
                     self.port = port
-                    return port
+                    return
                 except socket.error:
                     continue
         raise ValueError(f"No available ports found in the range {start_port}-{end_port}")
 
 
 class OllamaClient:
-    def __init__(self, port):
+    def __init__(self, port: int = 11434):
         self.port = port
 
     def ollama_pull_model(model_name: str) -> None:

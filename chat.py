@@ -5,8 +5,7 @@ from agents import Agent
 from chroma import ChromaHandler
 from config import ModelInstructions, ParamsConfig
 from messages import Message, Turn, start_new_conversation
-from ollama import OllamaServer
-from utilities import debug_print_function_return, stream_agent_response, toilet_banner_metal, toilet_banner_plain
+from utilities import stream_agent_response, toilet_banner_metal, toilet_banner_plain, debug_print_function_return
 
 
 class ChatHandler:
@@ -36,10 +35,11 @@ class ChatHandler:
         collection=self.chroma_handler.chroma_get_or_create_collection(f"{agent.name}-{conversation.guest}")
 
         # Instantiate the server, find an available port, and start the server on that port. 
-        server = OllamaServer()
-        server.find_available_port()
-        print(f"This session will use port: {server.port}")
-        server.start_server()
+        #TODO: varying the port seems to be causing issues. I am rolling back to hard coded single port default for now, investigating further.
+        #server = self.ollama_server
+        #print(f"This session will use port: {server.port}")
+        #server.start_server()
+
 
         try:
             while True:
@@ -71,11 +71,11 @@ class ChatHandler:
                 prompt = agent.build_prompt(request_message.content, username=username, agent_agent=False)
 
                 #####  DEBUG: PROMPT  #####
-                debug_print_function_return('Prompt', prompt)
+                #debug_print_function_return('Prompt', prompt)
                 #####  DEBUG END  #####
 
                 # Get the response and stream it to the terminal
-                response_content = agent.generate_response(prompt=prompt, server_port=server.port)
+                agent.last_response = agent.generate_response(prompt=prompt)
 
                 # Convert response to message class and pull the message string
                 response_message = Message(
@@ -83,10 +83,10 @@ class ChatHandler:
                     timestamp=str(datetime.now().strftime('%Y-%m-%d @ %H:%M')),
                     role='assistant',
                     speaker=conversation.host,
-                    content=response_content
+                    content=agent.last_response
                 )
 
-                stream_agent_response(agent.name, text=response_content, delay=.05)
+                stream_agent_response(agent.name, text=agent.last_response, delay=.05)
 
                 # Create turn and add to chat history
                 convo_turn = Turn(
@@ -111,10 +111,11 @@ class ChatHandler:
                 # Add Turn to Conversation YAML
         except KeyboardInterrupt:
             print("Interrupted by user...\n")
+            #server.stop_server()
         
         finally:
             print("Chat session ended.")
-            server.stop_server()
+            #server.stop_server()
 
 
     def multi_agent_chat(self, host_agent_name: str, guest_agent_name: str) -> None:
@@ -145,10 +146,9 @@ class ChatHandler:
                                               guest=guest_agent, 
                                               guest_is_bot=True)
         
-        server = OllamaServer()
-        server.find_available_port()
-        print(f"This session will use port: {server.port}")
-        server.start_server()
+        #server = OllamaServer()
+        #server.start_server()
+        #print(f"This session will use port: {server.port}")
         
         host_collection = self.chroma_handler.chroma_get_or_create_collection(f"{host_agent.name}-{guest_agent.name}")
         guest_collection = self.chroma_handler.chroma_get_or_create_collection(f"{guest_agent.name}-{host_agent.name}")
@@ -160,9 +160,8 @@ class ChatHandler:
         try:
             while True:
                 guest_prompt = guest_agent.build_prompt(host_agent.last_response, username=host_agent.name, agent_agent=True)
-                debug_print_function_return('Guest Prompt', guest_prompt)
-                guest_agent.last_response = guest_agent.generate_response(prompt=guest_prompt, server_port=server.port)
-
+                #debug_print_function_return('Guest Prompt', guest_prompt)
+                guest_agent.last_response = guest_agent.generate_response(prompt=guest_prompt)
                 guest_request_message = Message(
                     uuid=str(uuid4()),
                     timestamp=str(datetime.now().strftime('%Y-%m-%d @ %H:%M')),
@@ -176,8 +175,8 @@ class ChatHandler:
                 
                 # Request to Hosting Agent
                 host_agent_prompt = host_agent.build_prompt(guest_agent.last_response, username=guest_agent.name, agent_agent=True)
-                debug_print_function_return('Host Prompt', host_agent_prompt)
-                host_agent.last_response = host_agent.generate_response(prompt=host_agent_prompt, server_port=server.port)
+                #debug_print_function_return('Host Prompt', host_agent_prompt)
+                host_agent.last_response = host_agent.generate_response(prompt=host_agent_prompt)
 
                 host_response_message = Message(
                     uuid=str(uuid4()),
@@ -209,7 +208,8 @@ class ChatHandler:
                 self.chroma_handler.chroma_upsert_to_collection(collection=guest_collection, metadata=None, document=document, id=message_turn.uuid)
         except KeyboardInterrupt:
             print("Interrupted by user...\n")
+            #server.stop_server()
         
         finally:
             print("Chat session ended.")
-            server.stop_server()
+            #server.stop_server()

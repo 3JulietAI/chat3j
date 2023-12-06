@@ -108,41 +108,31 @@ class Agent:
         self.chroma_handler = ChromaHandler()
         self.tool_manager = ToolManager()
     
-    def look_in_toolbox(self, file_path: str = 'agent_tools.py') -> dict:
+    def look_in_toolbox(self) -> dict:
         """ 
-        Loads the agent_tools.py folder and return a dictionary of functions and their docstrings.
+        Call the ToolManager to load the agent_tools.py folder and return a dictionary of functions and their docstrings.
 
         :param file_path: (str) The path to the agent_tools.py file.
         :returns: (dict) A dictionary of functions and their docstrings. 
         """
-        module_name = Path(file_path).stem
-        spec = importlib.util.spec_from_file_location(module_name, file_path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-
-        function_dict = {}
-        for name, obj in inspect.getmembers(module):
-            if inspect.isfunction(obj):
-                function_dict[name] = {'docstring': obj.__doc__}
+        try:
+            function_dict = self.tool_manager.load_tools()
+        except Exception as e:
+            print(f"Error loading tools: {e}")
+            function_dict = None
 
         return function_dict
 
-    def call_function(self, function_name, module_name='agent_toolbox', *args, **kwargs):
+    def call_function(self, function_name, *args, **kwargs):
         """
-        Call a tool by name from the loaded module.
+        Call the ToolManager to remote execute a function from the loaded module.
 
         :param function_name: (str) The name of the function to call.
-        :param module_name: (str) The name of the module to load. Defaults to 'agent_toolbox'.
         :returns: (str) The result of the function call.
         """
-        try:
-            module = importlib.import_module(module_name)
-        except ImportError as e:
-            raise ImportError(f"Could not import module {module_name}: {e}")
-
-        func = getattr(module, function_name, None)
+        func = self.tool_manager.call_tool(function_name, *args, **kwargs)
         if not func:
-            raise AttributeError(f"Function {function_name} not found in the module {module_name}.")
+            raise AttributeError(f"Function {function_name} not found.")
 
         return func(*args, **kwargs)
 
@@ -185,7 +175,7 @@ class Agent:
 
         return template.safe_substitute(required_substitutions)
     
-    def generate_response(self, prompt: str, server_port: int) -> str:
+    def generate_response(self, prompt: str) -> str:
         """
         Generates an http request to the ollama server and returns the response.
 
@@ -210,7 +200,7 @@ class Agent:
             'Content-Type': 'application/json',
         }
 
-        url = f"http://localhost:{server_port}/api/generate"
+        url = f"http://localhost:11434/api/generate"
         try:
             response = requests.post(url, headers=completion_headers, data=json.dumps(data))
             # print(f"Response: {response}")
@@ -218,10 +208,9 @@ class Agent:
                 response_text = response.text
                 data = json.loads(response_text)
                 response_content = data["response"]
-
                 return response_content
         except Exception as e:
-            print(f'Error: {e}')
+            print(f"Error generating response: {e}")        
 
 
 class SystemAdmin:
@@ -229,6 +218,7 @@ class SystemAdmin:
     The AgentAdmin is intended to handled assets, such as agents and kb data and directories.
     """
     chroma_handler: ChromaHandler = ChromaHandler()
+    ollama_server: OllamaServer = OllamaServer()
 
     def create_new_agent(self):
         """
@@ -274,8 +264,6 @@ class SystemAdmin:
     
     def agent_intro_system(self, new_agent: Agent, username: str):
         server = OllamaServer()
-        server.find_available_port()
-        server.start_server()
         print(f"Server started on port {server.port}")
         print('----------------------------------------')
         creation_prompt = f"Hello, {new_agent.name}, my name is System. I help our Users like, {username} (your Designer), direct and provide instructions to our corps of purpose built agents, which now includes you. You will be able to see my base instructions to you at all times. For efficiency, I often issue updates, tasks and new commands through your context injection protocol which you will see as units of episodic memory using {username}'s role for indexing. Please carefully review your instructions, your memories and your chat history for context assistance when answering questions. Please acknowledge that you understand these instructions as they have been given to you and respond only with an affirmation so we may proceed."
@@ -283,7 +271,7 @@ class SystemAdmin:
         print('----------------------------------------')
     
         c_prompt = new_agent.build_prompt(creation_prompt, username=username, agent_agent=False)
-        new_agent.last_response = new_agent.generate_response(prompt=c_prompt, server_port=server.port)
+        new_agent.last_response = new_agent.generate_response(prompt=c_prompt)
         stream_agent_response(new_agent.name, f"{new_agent.name}:\n{new_agent.last_response}", 0.05)
         
         purpose_prompt = f"Your prompt contains all directives necessary to identify your purpose and to guide your responses to best meet {username}'s expectations. Before we go, please confirm that you understand your purpose and response directives by summarizing the entirety of the prompt given to you, in you own words. It will be my pleasure to assist you in any way I can and we do so look forward to working with you."
@@ -291,7 +279,7 @@ class SystemAdmin:
 
         p_prompt = new_agent.build_prompt(purpose_prompt, username=username, agent_agent=False)
         # Generate new agent's purpose response
-        new_agent.last_response = new_agent.generate_response(prompt=p_prompt, server_port=server.port)
+        new_agent.last_response = new_agent.generate_response(prompt=p_prompt)
         stream_agent_response(new_agent.name, f"{new_agent.name}:\n{new_agent.last_response}", 0.05)
 
     def add_new_agent_to_agents_list(self, new_agent_name: str, new_agent_llm_model: str, new_agent_description: str):
